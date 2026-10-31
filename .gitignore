@@ -1,0 +1,24 @@
+node_modules
+dist
+.vercel
+.DS_Store
+*.local
+.env
+.env.*
+!.env.example
+.claude
+
+# design explorations and generated prompt sheets, not part of the site
+output/
+
+# autonomous marketing runtime state (source and brand documents are versioned)
+command-center/.venv/
+command-center/config/.env
+command-center/db/*.db
+command-center/db/*.db-journal
+command-center/logs/
+command-center/assets/work/
+command-center/.runner.lock
+
+# Project 11:59 — separate project, not part of the P49 site
+project-11-59/
