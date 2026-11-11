@@ -62,8 +62,8 @@ export function Projects() {
     <section className="projects" id="projects">
       <div className="wrap">
         <div className="g12 sec-h">
-          <p className="lab rv">[ 03 ] &nbsp;Projects</p>
-          <h2 className="H rv sech">Our own <span className="b">work.</span></h2>
+          <p className="lab rv">III &nbsp;&mdash;&nbsp; Projects</p>
+          <h2 className="H rv sech">Selected <span className="b">work.</span></h2>
         </div>
         {PROJECTS.map((p, idx) => (
           <Project key={p.name} p={p} index={idx} onOpen={(shots, i, name) => setBox({ shots, i, name })} />

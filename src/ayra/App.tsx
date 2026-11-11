@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
 import { Dive, Gate } from './components/Gate';
-import { LogoCard, Materials, Process, Project49, Statement, Trail, Walk } from './components/Sections';
+import { LogoCard, Materials, Process, Project49, Statement } from './components/Sections';
 import { Projects } from './components/Projects';
-import { Header, Hero, Marquee } from './components/Top';
+import { Header } from './components/Top';
+import { Architect, Faq, HeroFilm, Reel, Services } from './components/Cinema';
 import { useReveal } from './hooks';
+import { startSmoothScroll } from '../smooth';
 
 /**
  * AYRA home page.
@@ -21,6 +23,7 @@ export default function App() {
   // lock scrolling while the entry gate is up
   useEffect(() => {
     document.documentElement.style.overflow = entered ? '' : 'hidden';
+    if (entered) startSmoothScroll(); // inertial, buttery scrolling on desktop (Lenis)
   }, [entered]);
 
   return (
@@ -28,20 +31,21 @@ export default function App() {
       <Header />
       {!entered && <Gate onEnterAyra={() => setDiving(true)} />}
       {diving && <Dive onLand={() => setEntered(true)} onDone={() => setDiving(false)} />}
-      <main id="top">
-        <Hero active={entered} />
-        <Marquee />
+      <main>
+        <HeroFilm active={entered} />
+        <Reel />
         <About />
-        <Walk />
+        <Services />
         <Projects />
+        <Architect />
         <Materials />
         <Statement />
         <Process />
+        <Faq />
         <Project49 />
       </main>
       <Contact />
       <LogoCard />
-      <Trail />
     </>
   );
 }

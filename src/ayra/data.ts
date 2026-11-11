@@ -33,8 +33,8 @@ export const EYE_PATHS = [
 
 export const NAV = [
   { label: 'Home', href: '#top' },
-  { label: 'Interiors', href: '#interiors', room: 0 },
-  { label: 'Exteriors', href: '#exteriors', room: 3 },
+  { label: 'Work', href: '#reel' },
+  { label: 'Services', href: '#services' },
   { label: 'Projects', href: '#projects' },
   { label: 'Project 49', href: '#project-49' },
 ];
@@ -46,10 +46,10 @@ export const DOOR_WORDS = {
 
 /** Hero: the pencil colours each of these in, one after another. */
 export const HERO_SCENES = [
-  { img: 'p1-r16', code: 'P-01', label: 'Pooja hall · Teak, Brass & Light' },
-  { img: 'p1-r05', code: 'P-01', label: 'Kitchen · Teak, Brass & Light' },
+  { img: 'p1-r16', code: 'P-01', label: 'Pooja hall — Teak, Brass & Light, Hyderabad' },
+  { img: 'p1-r05', code: 'P-01', label: 'Kitchen — Teak, Brass & Light' },
   { img: 'facade', code: 'E-01', label: 'Facade at dusk' },
-  { img: 'p1-r12', code: 'P-01', label: 'Hall · Teak, Brass & Light' },
+  { img: 'p1-r15', code: 'P-01', label: 'Painted coffered ceiling — Teak, Brass & Light' },
   { img: 'garden', code: 'E-02', label: 'Courtyard garden' },
 ];
 
@@ -126,10 +126,10 @@ export const MATERIALS = [
   { img: 'sw-jaali', name: 'Jaali', use: 'Light, air and privacy' },
 ];
 
-export const BELIEF = 'We don’t decorate rooms. We draw how you will live in them, then build every line.';
+export const BELIEF = 'A home should look like the family who lives in it, not like the one next door.';
 
 export const PROCESS = [
-  { title: 'Draw', text: 'We sit with you, sketch the space and build a 3D walkthrough you can step through before anything is ordered.', steps: ['Brief & site visit', 'Concept sketches', '3D walkthrough'] },
+  { title: 'Design', text: 'We sit with you, plan the space and build a 3D walkthrough you can step through before anything is ordered.', steps: ['Brief & site visit', 'Concept & mood board', '3D walkthrough'] },
   { title: 'Detail', text: 'Working drawings for every wall, cabinet and light, with real samples and a cost you sign off.', steps: ['Working drawings', 'Materials & samples', 'Lighting & electrical'] },
   { title: 'Build', text: 'Our site team builds to the drawings, then styles the rooms and hands you the keys.', steps: ['Execution on site', 'Styling', 'Handover'] },
 ];
@@ -145,3 +145,36 @@ export const BRIEF_CHIPS = {
   space: ['Whole home', 'Interiors', 'Exteriors & facade', 'A single room', 'Landscape'],
   timeline: ['Right away', '1–3 months', '3–6 months', 'Just exploring'],
 };
+
+/** The process film (2D plan → 3D model → finished home), made in Google Flow with Veo 3.1 Lite.
+ *  File lives in public/ayra/video. Add more clips to the list and they play back to back. */
+export const FILM = {
+  poster: '/ayra/video/ayra-process-poster.jpg',
+  clips: ['/ayra/video/ayra-process.mp4'],
+};
+
+/** Films made in Google Flow (Veo 3.1 Lite): each starts from the architect's sketch and ends on the real render.
+ *  Files live in public/ayra/video. The first one is the full-screen opening film. */
+const V = (n: string) => `/ayra/video/${n}`;
+export const FILMS = [
+  { src: V('ayra-film-pooja.mp4'), poster: IMG('p1-r16-sketch.jpg'), code: 'P-01', label: 'Pooja hall, Teak, Brass & Light', text: 'A pooja hall under a hand-painted coffered ceiling, with brass lamps and white marble.' },
+  { src: V('ayra-film-kitchen.mp4'), poster: IMG('p1-r05-sketch.jpg'), code: 'P-01', label: 'The kitchen', text: 'Teak shelving, brass storage jars and black granite, planned around how the family cooks.' },
+  { src: V('ayra-film-facade.mp4'), poster: IMG('facade-sketch.jpg'), code: 'E-01', label: 'A facade at dusk', text: 'Board-formed concrete, timber and glass, designed for how the house glows after sunset.' },
+  { src: V('ayra-film-mandapa.mp4'), poster: IMG('p1-r12-sketch.jpg'), code: 'P-01', label: 'Hall and mandapa', text: 'A carved teak mandapa at the centre of the home, drawn first, then built by hand.' },
+];
+
+export const SERVICES = [
+  { title: 'Interiors', text: 'Whole homes or single rooms, designed and detailed.', items: ['Living & dining', 'Kitchens', 'Bedrooms & wardrobes', 'Pooja rooms', 'Lighting design'] },
+  { title: 'Exteriors & elevations', text: 'The front of the house, the way it meets the street.', items: ['Elevation design', 'Facade materials', 'Courtyards & gardens', 'Gates, jaalis & screens'] },
+  { title: '3D walkthroughs', text: 'See and walk through the home before anything is ordered.', items: ['Photoreal renders', '3D walkthrough films', 'Material & colour options'] },
+  { title: 'Design + build', text: 'Our site team builds to the drawings and hands you the keys.', items: ['Working drawings', 'Site supervision', 'Styling & handover'] },
+];
+
+export const FAQ = [
+  { q: 'Where do you work?', a: 'We are based in Hyderabad and take on homes across Hyderabad and the Telugu states. For projects further away, call us and we will tell you honestly if we can serve you well.' },
+  { q: 'How long does a design take?', a: 'A single room usually takes 2 to 4 weeks from brief to final drawings; a full home 6 to 10 weeks. Building time depends on the scope and is planned with you at the start.' },
+  { q: 'Will I see the design before work starts?', a: 'Yes. You get hand sketches, then a 3D walkthrough and photoreal views, and you sign off each stage before anything is ordered.' },
+  { q: 'Do you visit the site?', a: 'Always. We measure and see the light on site before drawing a single line.' },
+  { q: 'How are fees worked out?', a: 'Fees depend on the scope and size of the project and are agreed in writing after the first meeting and site visit.' },
+  { q: 'Can you only design, and let my contractor build?', a: 'Yes. We can hand over full working drawings and visit the site at key stages, or our own team can build it for you.' },
+];

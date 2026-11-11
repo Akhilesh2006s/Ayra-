@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { BELIEF, COMPANY, IMG, MATERIALS, PROCESS, ROOMS, WORK } from '../data';
 import { prefersReducedMotion, useScroll } from '../hooks';
-import { DrawnEye, Pencil } from './Marks';
+import { DrawnEye } from './Marks';
 
 /** A walk through the house: scrolling down slides the rooms sideways, each coloured in as it reaches the centre. */
 export function Walk() {
@@ -36,8 +36,8 @@ export function Walk() {
     <section className="walk" id="walk" ref={walkRef}>
       <div className="wstick">
         <div className="whead wrap">
-          <p className="lab">[ 02 ] &nbsp;A walk through the house</p>
-          <h2 className="H">Inside <span className="b">&amp;</span> outside, <span className="b">one hand.</span></h2>
+          <p className="lab">II &nbsp;&mdash;&nbsp; A walk through the house</p>
+          <h2 className="H">Inside <span className="b">and</span> outside, <span className="b">one hand.</span></h2>
           <span className="lab wprog"><b>{String(current + 1).padStart(2, '0')}</b> / {String(ROOMS.length).padStart(2, '0')}</span>
         </div>
         <div className="wtrack" ref={trackRef}>
@@ -45,9 +45,7 @@ export function Walk() {
             <article className="pnl" id={'id' in room ? room.id : undefined} key={room.title}>
               <span className="pn" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               <div className="pv" ref={(el) => { if (el) views.current[i] = el; }}>
-                <img className="sk" src={IMG(`${room.img}-sketch.jpg`)} alt="" />
                 <img className="ph" src={IMG(`${room.img}.jpg`)} alt={`${room.title} designed by AYRA`} />
-                <Pencil />
                 <span className="note">{room.note}</span>
               </div>
               <div className="pt">
@@ -69,8 +67,8 @@ export function Materials() {
     <section className="mats" id="materials">
       <div className="wrap">
         <div className="g12 sec-h">
-          <p className="lab rv">[ 04 ] &nbsp;Material library</p>
-          <h2 className="H rv sech">Samples on <span className="b">the table.</span></h2>
+          <p className="lab rv">IV &nbsp;&mdash;&nbsp; Materials</p>
+          <h2 className="H rv sech">Stone, lime <span className="b">and timber.</span></h2>
         </div>
         <div className="mgrid">
           {MATERIALS.map((m, i) => (
@@ -102,7 +100,7 @@ export function Statement() {
     <section className="statement">
       <DrawnEye className="seye" />
       <div className="wrap">
-        <p className="lab">[ 05 ] &nbsp;What we believe</p>
+        <p className="lab">V &nbsp;&mdash;&nbsp; What we believe</p>
         <p className="big H" ref={ref} aria-label={BELIEF}>
           {words.map((w, i) => <span key={i} className={i < lit ? 'lit' : undefined}>{w} </span>)}
         </p>
@@ -116,8 +114,8 @@ export function Process() {
     <section className="process">
       <div className="wrap">
         <div className="g12 sec-h">
-          <p className="lab rv">[ 06 ] &nbsp;How we work</p>
-          <h2 className="H rv">Draw. Detail. <span className="b">Build.</span></h2>
+          <p className="lab rv">VI &nbsp;&mdash;&nbsp; How we work</p>
+          <h2 className="H rv">Design. Detail. <span className="b">Build.</span></h2>
         </div>
         <div className="pgrid">
           {PROCESS.map((p, i) => (
@@ -139,7 +137,7 @@ export function Project49() {
   return (
     <section className="p49band night" id="project-49">
       <div className="wrap g12 p49in">
-        <p className="lab rv">[ 07 ] &nbsp;AYRA &times; Project 49</p>
+        <p className="lab rv">VII &nbsp;&mdash;&nbsp; AYRA &times; Project 49</p>
         <a className="mk rv" href="/project-49/" aria-label="Enter Project 49"><i className="ring" /><img src={IMG('elephant.webp')} alt="Project 49 elephant mark" /></a>
         <div className="tx rv">
           <p className="lab" style={{ marginBottom: 18 }}>Forty-nine homes</p>

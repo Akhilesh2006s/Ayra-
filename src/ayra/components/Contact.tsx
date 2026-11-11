@@ -56,13 +56,10 @@ export function Contact() {
       <div className="wrap">
         <p className="lab rv">[ Start a project ]</p>
         <h2 className={`H rv ctah${headIn ? ' in' : ''}`} ref={headRef} style={{ marginTop: 24 }}>
-          Let&rsquo;s<br /><span className="b">draw.</span>
-          <svg className="uline" viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true">
-            <path pathLength={1} d="M6 40 C120 18 240 52 360 30 S560 22 594 34" />
-          </svg>
+          Let&rsquo;s<br /><span className="b">begin.</span>
         </h2>
         <div className="row g12 rv">
-          <p>Tell us about the room or the house. We&rsquo;ll call you back within one working day, come to see the space and start with a sketch.</p>
+          <p>Tell us about the room or the house. We&rsquo;ll call you back within one working day, and come to see the space.</p>
           <span className="ph">{CONTACT.phoneLabel}</span>
           <a className="btn fill" href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener">WhatsApp us <span className="ar">&rarr;</span></a>
         </div>
@@ -79,7 +76,7 @@ export function Contact() {
         </form>
         <footer className="ft g12">
           <Logo />
-          <nav><a href="#walk">Interiors &amp; exteriors</a><a href="#projects">Projects</a><a href="#materials">Materials</a><a href="/project-49/">Project 49</a></nav>
+          <nav><a href="#services">Services</a><a href="#reel">Work</a><a href="#projects">Projects</a><a href="#materials">Materials</a><a href="/project-49/">Project 49</a></nav>
           <span className="lab">Studio Hyderabad &middot; &copy; {new Date().getFullYear()}</span>
         </footer>
       </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { DOOR_WORDS, EYE_PATHS, EYE_VIEWBOX, IMG } from '../data';
 import { prefersReducedMotion } from '../hooks';
-import { CycleWord, Logo, Pencil, PencilShape } from './Marks';
+import { CycleWord, Logo } from './Marks';
 
 /**
  * The entry: on black, a pencil draws the AYRA eye, it blinks, then two doors open:
@@ -14,8 +14,6 @@ export function Gate({ onEnterAyra }: { onEnterAyra: () => void }) {
   const [blink, setBlink] = useState(false);
   const [peek, setPeek] = useState<number | null>(null);
   const lgRef = useRef<HTMLDivElement>(null);
-  const pathRefs = useRef<(SVGPathElement | null)[]>([]);
-  const penRef = useRef<SVGGElement>(null);
 
   const open = () => {
     setOpened((was) => {
@@ -24,41 +22,16 @@ export function Gate({ onEnterAyra }: { onEnterAyra: () => void }) {
     });
   };
 
-  // the opening drawing
+  // the opening: the AYRA eye fades in, blinks, then the doors open
   useEffect(() => {
     const reduce = prefersReducedMotion();
-    let raf = 0;
-    const start = requestAnimationFrame(() => requestAnimationFrame((t0) => {
-      setPlay(true);
-      const ps = pathRefs.current.filter(Boolean) as SVGPathElement[];
-      if (reduce) { ps.forEach((p) => (p.style.strokeDashoffset = '0')); if (penRef.current) penRef.current.style.opacity = '0'; return; }
-      const lens = ps.map((p) => p.getTotalLength());
-      const total = lens.reduce((a, b) => a + b, 0);
-      const begin = t0 + 150;
-      const tick = (t: number) => {
-        const k = Math.min(1, Math.max(0, (t - begin) / 2300));
-        let d = k * total;
-        ps.forEach((p, i) => {
-          const part = Math.min(1, Math.max(0, d / lens[i]));
-          p.style.strokeDashoffset = String(1 - part);
-          if (d > 0 && d <= lens[i] && penRef.current) {
-            const pt = p.getPointAtLength(d);
-            penRef.current.setAttribute('transform', `translate(${pt.x},${pt.y})`);
-          }
-          d -= lens[i];
-        });
-        if (k < 1) raf = requestAnimationFrame(tick);
-        else {
-          if (penRef.current) penRef.current.style.opacity = '0';
-          window.setTimeout(() => setBlink(true), 250);
-        }
-      };
-      raf = requestAnimationFrame(tick);
-    }));
-    const auto = window.setTimeout(open, reduce ? 900 : 4400);
+    const start = requestAnimationFrame(() => requestAnimationFrame(() => setPlay(true)));
+    const b = window.setTimeout(() => setBlink(true), reduce ? 0 : 1500);
+    const auto = window.setTimeout(open, reduce ? 900 : 3600);
     const key = () => open();
     window.addEventListener('keydown', key, { once: true });
-    return () => { cancelAnimationFrame(start); cancelAnimationFrame(raf); window.clearTimeout(auto); window.removeEventListener('keydown', key); };
+    return () => { cancelAnimationFrame(start); window.clearTimeout(b); window.clearTimeout(auto); window.removeEventListener('keydown', key); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // each door briefly shows what is behind it
@@ -88,14 +61,11 @@ export function Gate({ onEnterAyra }: { onEnterAyra: () => void }) {
         <div className={`intro${play ? ' play' : ''}${opened ? ' done' : ''}`} aria-hidden="true" onClick={open} onPointerMove={tilt}>
           <div className="lg" ref={lgRef}>
             <svg className={`mk${blink ? ' blink' : ''}`} viewBox={EYE_VIEWBOX}>
-              {EYE_PATHS.map((d, i) => <path key={i} ref={(el) => { pathRefs.current[i] = el; }} pathLength={1} d={d} />)}
-              <g className="pg" ref={penRef}>
-                <g transform="rotate(-38) scale(2.2) translate(0,-10)"><PencilShape /></g>
-              </g>
+              {EYE_PATHS.map((d, i) => <path key={i} d={d} />)}
             </svg>
-            <i className="cu" style={{ transitionDelay: '2.3s' }} />
+            <i className="cu" style={{ transitionDelay: '1.1s' }} />
             <span className="wm">
-              {'AYRA'.split('').map((c, i) => <b key={i} style={{ transitionDelay: `${2.5 + i * 0.1}s` }}>{c}</b>)}
+              {'AYRA'.split('').map((c, i) => <b key={i} style={{ transitionDelay: `${1.3 + i * 0.1}s` }}>{c}</b>)}
             </span>
             <span className="tag">Associates &middot; Interior &amp; exterior design</span>
           </div>
@@ -108,14 +78,12 @@ export function Gate({ onEnterAyra }: { onEnterAyra: () => void }) {
       <a className={`door d1${peek === 0 ? ' peek' : ''}`} href="#top"
         onClick={(e) => { e.preventDefault(); open(); onEnterAyra(); }}>
         <span className="art">
-          <img className="sk" src={IMG('p1-r16-sketch.jpg')} alt="" />
           <img className="ph" src={IMG('p1-r16.jpg')} alt="" />
-          <Pencil />
         </span>
         <span className="k">01 / Design studio</span>
         <span className="H dh">AYRA<br /><span className="b">interior &amp; exterior</span></span>
-        <span className="dp">Homes designed inside and out, from the first pencil line to the last cushion.
-          <span className="tease"> Point here and watch the sketch become the room.</span></span>
+        <span className="dp">Interiors and exteriors, designed in Hyderabad.
+          <span className="tease"> Rooms, facades and gardens, designed as one.</span></span>
         <span className="cyc" aria-hidden="true"><CycleWord words={DOOR_WORDS.ayra} ms={2200} /></span>
         <span className="enter"><i>&rarr;</i>Enter AYRA</span>
       </a>
